@@ -1,0 +1,2 @@
+Tarefa de teste 01.|bash-todo-list|Pending
+Tarefa de teste 02.|bash-todo-list|Pending
