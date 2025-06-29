@@ -1,2 +1,3 @@
 Tarefa de teste 01.|bash-todo-list|Pending
 Tarefa de teste 02.|bash-todo-list|Pending
+Tarefa de nome muito grande para saber o comportamento da tabela.|bash-todo-list|Pending
