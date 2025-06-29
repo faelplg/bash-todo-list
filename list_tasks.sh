@@ -12,11 +12,15 @@ fi
 
 # Displays the tasks in a table format
 echo "Tasks list:"
-echo "------------------------------"
+echo "--------------------------------------------------------------------------------"
+printf "%-40s | %-20s | %-10s\n" "Tarefa" "Projeto" "Status"
+echo "--------------------------------------------------------------------------------"
 while IFS="|" read -r task_name project_name task_status; do
-	echo "Tarefa: $task_name"
-	echo "Projeto: $project_name"
-	echo "Status: $task_status"
-	echo "------------------------------"
+	# Trunca o nome da tarefa se for maior que 30 caracteres
+	if [[ ${#task_name} -gt 40 ]]; then
+		task_name="${task_name:0:37}..."
+	fi
+	printf "%-40s | %-20s | %-10s\n" "$task_name" "$project_name" "$task_status"
 done < "$TASK_FILE"
 
+echo "--------------------------------------------------------------------------------"

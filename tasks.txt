@@ -1,2 +1,5 @@
-Tarefa de teste 01.|bash-todo-list|Pending
-Tarefa de teste 02.|bash-todo-list|Pending
+Add position instead of index.|bash-todo-list|Pending
+Start task entry by selecting the project.|bash-todo-list|Pending
+View task by position.|bash-todo-list|Pending
+View list_tasks by project.|bash-todo-list|Pending
+Add .gitignore for the tasks.txt.|bash-todo-list|Pending
