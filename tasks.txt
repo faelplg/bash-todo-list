@@ -1,5 +1,5 @@
-Add position instead of index.|bash-todo-list|Pending
-Start task entry by selecting the project.|bash-todo-list|Pending
-View task by position.|bash-todo-list|Pending
-View list_tasks by project.|bash-todo-list|Pending
-Add .gitignore for the tasks.txt.|bash-todo-list|Pending
+1|Add position instead of index.|bash-todo-list|Pending
+2|Start task entry by selecting the project.|bash-todo-list|Pending
+3|View task by position.|bash-todo-list|Pending
+4|View list_tasks by project.|bash-todo-list|Pending
+5|Add .gitignore for the tasks.txt.|bash-todo-list|Pending
