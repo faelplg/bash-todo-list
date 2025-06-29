@@ -12,7 +12,7 @@ fi
 
 # Displays the tasks in a table format
 echo "Tasks list:"
-echo "------------------------------"
+echo "--------------------------------------------------------------------------------"
 while IFS="|" read -r task_name project_name task_status; do
 	echo "Tarefa: $task_name"
 	echo "Projeto: $project_name"
