@@ -8,7 +8,8 @@ My personal todo-list app implemented in bash.
 - List pending tasks.
 - Add a new task.
 - Edit an existing task.
-- Delete a task
+- Delete a task.
+- Change position of a task.
 
 ### Task fields
 
@@ -16,9 +17,7 @@ My personal todo-list app implemented in bash.
 - Project (workspaces folder);
 - Status
 
-## Implementation Plan
-
-### First session
+## Features descriptions
 
 1. **Task Storage**
 
