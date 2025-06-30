@@ -17,15 +17,16 @@ My personal todo-list app implemented in bash.
 - Project (workspaces folder);
 - Status
 
-## Features descriptions
+## Features Descriptions
 
-1. **Task Storage**
+### Task Storage
 
-   - Use a `tasks.txt` file where each line represents a task, with fields separated by delimiters such as `|`.
+Tasks are stored in a `tasks.txt` file, where each line represents a task. Fields within a task are separated by delimiters such as `|`.
 
-2. **Script for Adding Tasks**
+### Script for Adding Tasks
 
-   - Create a Bash script to add new tasks. The script should prompt the user for the required fields and save the task in the `tasks.txt` file.
+A Bash script is used to add new tasks. The script prompts the user for the required fields and saves the task in the `tasks.txt` file.
 
-3. **List Tasks**
-   - Read the `tasks.txt` file and show a formatted tasks list to the user.
+### Listing Tasks
+
+The script reads the `tasks.txt` file and displays a formatted list of tasks to the user.
