@@ -17,6 +17,12 @@ if [[ ! -f "$TASK_FILE" || ! -s "$TASK_FILE" ]]; then
 	exit 0
 fi
 
+# Update task status to done
+mark_task_done() {
+        sed -i '' "s/^$task_pos|.*$/$task_pos|$task_name|$project_name|Done/" "$TASK_FILE"
+	echo -e "\n${GREEN}Task marked as done.${NC}"
+}
+
 # Prompt user to select a task by position
 echo -e "\n${BLUE}Enter the position of the task you want to manage: ${NC}"
 read task_pos
@@ -42,7 +48,8 @@ echo -e "Status: $task_status"
 echo -e "\n${BLUE}What would you like to do?${NC}"
 echo "1. Edit Task"
 echo "2. Delete Task"
-echo "3. Exit"
+echo "3. Mark as Done"
+echo "4. Exit"
 read action
 
 case $action in
@@ -70,7 +77,13 @@ case $action in
         echo -e "\n${GREEN}Task deleted successfully.${NC}"
         ;;
     3)
-        echo -e "\n${BLUE}Exiting.${NC}"
+	# Mark task as done
+	
+	mark_task_done
+	;;
+
+    4)
+        echo -e "\n${GREEN}Exiting.${NC}"
         ;;
     *)
         echo -e "${RED}Invalid option.${NC}"
