@@ -19,15 +19,15 @@ fi
 
 # Displays the tasks in a table format
 echo "TASK BOARD"
-echo "------------------------------------------------------------------------------------------"
-printf "%-5s | %-40s | %-20s | %-10s\n" "Pos" "Task" "Project" "Status"
-echo "------------------------------------------------------------------------------------------"
+echo "-----------------------------------------------------------------------------------------------"
+printf "%-5s | %-50s | %-20s | %-15s\n" "Pos" "Task" "Project" "Status"
+echo "-----------------------------------------------------------------------------------------------"
 while IFS="|" read -r pos task_name project_name task_status; do
 	# Trunca o nome da tarefa se for maior que 30 caracteres
-	if [[ ${#task_name} -gt 40 ]]; then
-		task_name="${task_name:0:37}..."
+	if [[ ${#task_name} -gt 50 ]]; then
+		task_name="${task_name:0:47}..."
 	fi
-	printf "%-5s | ${YELLOW}%-40s${NC} | %-20s | %-10s\n" "$pos" "$task_name" "$project_name" "$task_status"
+	printf "%-5s | ${YELLOW}%-50s${NC} | %-20s | %-15s\n" "$pos" "$task_name" "$project_name" "$task_status"
 done < "$TASK_FILE"
 
-echo "------------------------------------------------------------------------------------------"
+echo "-----------------------------------------------------------------------------------------------"
