@@ -29,7 +29,6 @@ read task_pos
 
 # Find the task by position
 task_line=$(grep "^$task_pos|" "$TASK_FILE")
-echo -e "$task_line"
 
 if [[ -z "$task_line" ]]; then
     echo -e "${RED}Task not found.${NC}"
@@ -37,10 +36,11 @@ if [[ -z "$task_line" ]]; then
 fi
 
 # Display task details
-IFS="|" read -r pos task_name project_name task_status <<< "$task_line"
+IFS="|" read -r pos task_name project_name task_status task_description <<< "$task_line"
 echo -e "\n${BLUE}Task Details:${NC}"
 echo -e "Position: $pos"
 echo -e "Task Name: ${YELLOW}${task_name}${NC}"
+echo -e "Task Description: ${task_description}"
 echo -e "Project: $project_name"
 echo -e "Status: $task_status"
 

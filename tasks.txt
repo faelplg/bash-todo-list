@@ -1,10 +1,13 @@
 1|Insert and update positions automatically.|bash-todo-list|Done
 2|Start task entry by selecting the project.|bash-todo-list|Done
 3|View task by position.|bash-todo-list|Done
-4|View list_tasks by project.|bash-todo-list|Pending
-5|Add .gitignore for the tasks.txt.|bash-todo-list|Pending
+4|View list_tasks by project.|bash-todo-list|Done
+5|Add .gitignore for the tasks.txt.|bash-todo-list|Done
 6|Check if task file exists before add a new entry.|bash-todo-list|Done
 7|Add description field.|bash-todo-list|Pending
 8|Show description field only in management_task.|bash-todo-list|Pending
 9|Mark task as done inside management_task.|bash-todo-list|Done
 10|Fix mark task done strategy.|bash-todo-list|Done
+11|Create task under a project.|bash-todo-list|Pending
+12|List tasks by status.|bash-todo-list|Pending
+13|Add pos number to edit task command.|bash-todo-list|Pending|Include --pos=N to improve edit flow.

@@ -33,7 +33,7 @@ echo "${line_div}"
 printf "%-5s | %-50s | %-20s | %-15s\n" "Pos" "Task" "Project" "Status"
 echo "${line_div}"
 
-while IFS="|" read -r pos task_name project_name task_status; do
+while IFS="|" read -r pos task_name project_name task_status task_description; do
 	# Truncate task_name to a max 50 length
 	if [[ ${#task_name} -gt 50 ]]; then
 		task_name="${task_name:0:47}..."
@@ -45,6 +45,11 @@ while IFS="|" read -r pos task_name project_name task_status; do
 			;;
 		"--pending")
 			if [[ ${task_status} == "Pending" ]]; then
+				printf "%-5s | ${YELLOW}%-50s${NC} | %-20s | %-15s\n" "$pos" "$task_name" "$project_name" "$task_status"
+			fi
+			;;
+		"--done")
+			if [[ ${task_status} == "Done" ]]; then
 				printf "%-5s | ${YELLOW}%-50s${NC} | %-20s | %-15s\n" "$pos" "$task_name" "$project_name" "$task_status"
 			fi
 			;;
