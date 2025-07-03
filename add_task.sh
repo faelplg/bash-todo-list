@@ -25,6 +25,9 @@ project_name=$(basename "$project_name")
 echo -e "\n${BLUE}Enter task name: ${NC}"
 read task_name
 
+echo -e "\n${BLUE}Enter description: ${NC}"
+read task_description
+
 task_status="Pending"
 
 # Calculate the position for the new task
@@ -36,6 +39,6 @@ else
 fi
 
 # Add task in the file
-echo "$pos|$task_name|$project_name|$task_status" >> "$TASK_FILE"
+echo "$pos|$task_name|$project_name|$task_status|$task_description" >> "$TASK_FILE"
 
 echo -e "\n${GREEN}Task added successfully.${NC}"

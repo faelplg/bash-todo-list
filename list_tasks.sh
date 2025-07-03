@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
+# Define constants
 TASK_FILE="tasks.txt"
+
+# Define main variables
+mode="--all"
+line_div="-----------------------------------------------------------------------------------------------"
 
 # Define color variables
 RED='\033[0;31m'
@@ -17,17 +22,43 @@ if [[ ! -f "$TASK_FILE" || ! -s "$TASK_FILE" ]]; then
 	exit 0
 fi
 
+# Get listing mode
+if [[ $# -gt 0 ]]; then
+	mode=$1
+fi
+
 # Displays the tasks in a table format
 echo "TASK BOARD"
-echo "-----------------------------------------------------------------------------------------------"
+echo "${line_div}"
 printf "%-5s | %-50s | %-20s | %-15s\n" "Pos" "Task" "Project" "Status"
-echo "-----------------------------------------------------------------------------------------------"
-while IFS="|" read -r pos task_name project_name task_status; do
-	# Trunca o nome da tarefa se for maior que 30 caracteres
+echo "${line_div}"
+
+while IFS="|" read -r pos task_name project_name task_status task_description; do
+	# Truncate task_name to a max 50 length
 	if [[ ${#task_name} -gt 50 ]]; then
 		task_name="${task_name:0:47}..."
 	fi
-	printf "%-5s | ${YELLOW}%-50s${NC} | %-20s | %-15s\n" "$pos" "$task_name" "$project_name" "$task_status"
+	
+	case $mode in
+		"--all")
+			printf "%-5s | ${YELLOW}%-50s${NC} | %-20s | %-15s\n" "$pos" "$task_name" "$project_name" "$task_status"
+			;;
+		"--pending")
+			if [[ ${task_status} == "Pending" ]]; then
+				printf "%-5s | ${YELLOW}%-50s${NC} | %-20s | %-15s\n" "$pos" "$task_name" "$project_name" "$task_status"
+			fi
+			;;
+		"--done")
+			if [[ ${task_status} == "Done" ]]; then
+				printf "%-5s | ${YELLOW}%-50s${NC} | %-20s | %-15s\n" "$pos" "$task_name" "$project_name" "$task_status"
+			fi
+			;;
+		*)
+			echo -e "${RED}Invalid parameter.${NC}"
+			echo "${line_div}"
+			exit 1
+        		;;
+	esac
 done < "$TASK_FILE"
 
-echo "-----------------------------------------------------------------------------------------------"
+echo "${line_div}"
