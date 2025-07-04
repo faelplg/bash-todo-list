@@ -102,6 +102,7 @@ main() {
 
 	case "$1" in
 		"add")
+			# add "task description" "status"
 			add_task "$2" "$3"
 			;;
 		"list")
