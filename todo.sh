@@ -45,12 +45,13 @@ add_task() {
 }
 
 list_tasks() {
-	local filtered_all=${1}
-	if [ -z "$filtered_all" ]; then
+	local project_filter="$1"
+	local status_filter="$2"
+
+	if [[ "$project_filter" = "select" ]]; then
 		local project_path=$(find $HOME/workspaces -type d -mindepth 1 -maxdepth 1 | fzf)
-		local filtered_project=$(basename "$project_path")
+		local project_filter=$(basename "$project_path")
 	fi
-	local filtered_status=${2:-any}
 	local count=0
 
 	if [ ! -f "$TODO_FILE" ] || [ ! -s "$TODO_FILE" ]; then
@@ -58,7 +59,7 @@ list_tasks() {
 		return
 	fi
 
-	echo -e "\n${PURPLE}=== Todo List: [${filtered_project}:${filtered_status}]${NC}"
+	echo -e "\n${PURPLE}=== Todo List: [${project_filter}:${status_filter}]${NC}"
 	echo ""
 
 	# List header
@@ -71,11 +72,11 @@ list_tasks() {
 
 		# Apply filters.
 		# By project.
-		if [ -n "$filtered_project" ] && [ "$project" != "$filtered_project" ]; then
+		if [ "$project_filter" != "all" ] && [ "$project" != "$project_filter" ]; then
 			continue
 		fi
 		# By status.
-		if [ "$filtered_status" != "any" ] && [ "$status" != "$filtered_status" ]; then
+		if [ "$status_filter" != "any" ] && [ "$status" != "$status_filter" ]; then
 			continue
 		fi
 
@@ -98,6 +99,36 @@ list_tasks() {
 	fi
 	echo "${LINE_96}"
 	echo "$count task(s) found."
+}
+
+prepare_list() {
+	# Filter variables
+	local project_filter="select"
+	local status_filter="any"
+
+	# Manipulate arguments
+	if [[ -n "$1" ]]; then
+		while [[ "$#" -gt 0 ]]; do
+			case "$1" in
+				--project=*)
+					project_filter="${1#*=}" # Extract the value after '='
+					;;
+				--status=*)
+					status_filter="${1#*=}" # Extract the value after '='
+					;;
+				*)
+					echo -e "${RED}Unknown argument: $1${NC}"
+					# return 1
+					;;
+			esac
+			shift # Continue to next argument
+		done
+	fi
+	# Debug
+	echo -e "${YELLOW}Project filter: ${project_filter}${NC}"
+	echo -e "${YELLOW}Status filter: ${status_filter}${NC}"
+
+	list_tasks "$project_filter" "$status_filter"
 }
 
 mark_done() {
@@ -183,7 +214,7 @@ main() {
 			add_task "$2" "$3"
 			;;
 		"list")
-			list_tasks "$2" "$3"
+			prepare_list "$2" "$3"
 			;;
 		"done")
 			mark_done "$2"
