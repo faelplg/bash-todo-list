@@ -204,6 +204,29 @@ delete_task() {
 	fi
 }
 
+normalize_ids() {
+	# Check if the Todo file has tasks.
+	if [ ! -s "$TODO_FILE" ]; then
+		echo -e "${RED}No tasks found.${NC}"
+		return 1
+	fi
+
+	local tempf=$(mktemp)
+	local new_id=1
+
+	# Read the tasks and reassign sequential IDs.
+	while IFS='|' read -r id status project description; do
+		# Skip  empty lines.
+		[ -z "$id" ] && continue
+
+		echo "${new_id}|${status}|${project}|${description}" >> "$tempf"
+		new_id=$((new_id + 1))
+	done < "$TODO_FILE"
+
+	# Replace the original file.
+	mv "$tempf" "$TODO_FILE"
+	echo -e "${GREEN}IDs normalized.${NC}"
+}
 
 main() {
 	init
@@ -221,6 +244,9 @@ main() {
 			;;
 		"delete")
 			delete_task "$2"
+			;;
+		"normalize")
+			normalize_ids
 			;;
 		*)
 			echo -e "${RED}Unknown command: $1${NC}"
