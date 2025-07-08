@@ -249,7 +249,7 @@ main() {
 			normalize_ids
 			;;
 		*)
-			echo -e "${RED}Unknown command: $1${NC}"
+			echo -e "${RED}Unknown command $1${NC}"
 			exit 1
 			;;
 	esac
