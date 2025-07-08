@@ -18,6 +18,8 @@ PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
+source "$(dirname "$0")/help.sh"
+
 init() {
 	# Checks if exists .todo folder in the workspace.
 	if [ ! -d "$TODO_DIR" ]; then
@@ -247,6 +249,9 @@ main() {
 			;;
 		"normalize")
 			normalize_ids
+			;;
+		"help")
+			show_help
 			;;
 		*)
 			echo -e "${RED}Unknown command $1${NC}"
